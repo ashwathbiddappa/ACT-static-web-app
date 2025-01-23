@@ -1,0 +1,10 @@
+## Dockerfile Explanation
+
+- **Base Image**: We are using a lightweight NGINX image based on Alpine Linux.
+  - Alpine makes the image smaller and faster.
+
+- **Copying the HTML File**: The `index.html` file is copied into the container so it can be served by NGINX.
+
+- **Expose Port 80**: We expose port 80 because NGINX uses this port to serve web traffic.
+
+- **CMD Command**: We use `CMD` to run NGINX in the foreground. This keeps the container running and serving the page.
