@@ -1,0 +1,21 @@
+Install kube-prometheus-stack
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+Deploy the chart into a new namespace "monitoring"
+
+kubectl create ns monitoring
+helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring -f ./custom_kube_prometheus_stack.yml
+
+ Verify the Installation
+
+ kubectl get all -n monitoring
+
+ Prometheus UI:
+ kubectl port-forward service/prometheus-operated -n monitoring 9090:9090
+
+ THESE STACK also installs GRAFANA for data visulization 
+
+ kubectl port-forward service/monitoring-grafana -n monitoring 8080:80
+
