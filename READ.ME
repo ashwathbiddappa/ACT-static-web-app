@@ -3,71 +3,69 @@
 This solution involves setting up a web application in a Kubernetes cluster on Amazon EKS. The application consists of a static web page served using NGINX. 
 The infrastructure and application are automated using Terraform, and basic monitoring (CPU, memory, and disk usage) is set up using Prometheus and Grafana.
 
-Steps for Deployment
 
-1.Docker 
- Build and Push Docker Image
- The app consists of a simple HTML file served using NGINX.
-Create a Dockerfile: A simple Dockerfile is used to containerize the web application using the official NGINX image.
-Build the Docker Image: The Docker image is built
+1.    Docker Setup and Deployment
+Create and Build Docker Image:
+
+Dockerfile: we are using a simple HTML file served via NGINX.
+Build the Docker Image: The Docker image is built using the following command:
 
 docker build -t web-app .
 
-Push the Image to AWS ECR: Push the built image to Amazon ECR for access by the EKS cluster.
+Push to AWS ECR: Push the image to AWS ECR to make it available to our EKS cluster:
 
-docker push web app 
+docker push <repository-url>/web-app
 
-2. Provision Infrastructure with Terraform
+2.  Terraform Setup:
 
-This section deploys the necessary infrastructure, such as VPC, EKS Cluster,Security group and EKS Node Group, using Terraform.
 Initialize Terraform:
 
 terraform init
 
-Validate the configuration:
+Validate Terraform Configuration:
 
-terraform plan 
+terraform plan
 
-Create and apply the Terraform plan to provision the AWS resources:
+Apply Terraform Configuration:
 
 terraform apply
 
-
-This will create:
+This step provisions the following AWS resources:
 VPC with a public subnet.
-EKS Cluster with associated IAM roles.
-EKS Node Group for running worker nodes.
+EKS Cluster with IAM roles.
+EKS Node Group to run the worker nodes.
 
-
-3.Deploy Web Application to EKS
-
-Apply the deployment and service files:
+  3. Kubernetes Deployment
+Deploy Web Application to EKS:
+Deploy the application and service using kubectl:
 
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
-4. Set Up Monitoring with Prometheus and Grafana
-To monitor your application and Kubernetes cluster, 
-after installing using helm as mentioned in monitoring we can now acees it through 
+   4.Monitoring with Prometheus and Grafana
 
-http://localhost:9090 -promethus
-http://localhost:8080 -grafana 
+Set Up Monitoring:
+Install the Prometheus and Grafana stack using Helm as outlined in our setup.
+Access Prometheus:
 
-5. Verify the Deployment
+Access Prometheus UI via http://localhost:9090.
 
-Check if your application is running:
+Access Grafana:
+
+Access Grafana UI via http://localhost:8080.
+
+   5.Verify Deployment
+
+Verify Application and Service:
+To check the pods and services created:
 
 kubectl get pods
-
-
-Check if the service is created:
-
 kubectl get svc
 
-by givig this we will get external ip of the load balancer and we access the application thorugh
+we will get the external IP of the load balancer, which we can access the application through:
 
 http://<external-ip>
 
-Coustom dmain 
-
-We can use AWS route 53  f0r dns managment 
+Custom Domain Setup
+Set Up Custom Domain with Route 53:
+we can use AWS Route 53 for DNS management to map the load balancer's external IP to a custom doma
