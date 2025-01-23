@@ -64,7 +64,7 @@ kubectl get svc
 
 we will get the external IP of the load balancer, which we can access the application through:
 
-http://<external-ip>
+http://extenal ip
 
 Custom Domain Setup
 Set Up Custom Domain with Route 53:
