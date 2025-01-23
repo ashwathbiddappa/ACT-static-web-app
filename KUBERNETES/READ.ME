@@ -1,0 +1,18 @@
+Deployment Configuration:
+Purpose: The Deployment manages the app and ensures the right number of app copies (replicas) are running.
+
+Replicas: We use 1 replica here, but it's better to use at least 3 replicas in production for better availability.
+
+Container: The app runs in a container with an NGINX image to serve the static file (index.html).
+
+Port Exposure: The app exposes port 80, the default HTTP port, to allow traffic to reach the app.
+
+
+SERVICE configuration
+Purpose: The Kubernetes Service exposes the app to external traffic and provides a stable endpoint.
+
+Type: We are using a LoadBalancer service, which creates a sile load balancer , if we need to use load balancer like ALB for advance load balancing 
+like path based we need to set up an Ingress Controller and an Ingress resource.
+
+.
+
