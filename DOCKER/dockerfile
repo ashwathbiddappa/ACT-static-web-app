@@ -1,0 +1,15 @@
+   # who is creating the file 
+MAINTAINER ASHWATH
+     
+  # Specifying base image 
+FROM nginx:alpine
+
+ # Copy the HTML file into the container's nginx web directory
+COPY index.html /usr/share/nginx/html/index.html
+
+ # Expose port 80 
+EXPOSE 80
+
+ # Set the default command to run NGINX 
+CMD ["nginx", "-g", "daemon off;"]
+  
